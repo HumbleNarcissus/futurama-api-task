@@ -1,0 +1,24 @@
+.image {
+    width: 200px;
+    height: 300px;
+}
+
+.character {
+    border-bottom: 1px black solid;
+    cursor: pointer;
+}
+
+.character:last-child {
+    border-bottom: none;
+}
+
+.quote {
+    padding: 0 5px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .character {
+        border-bottom: none;
+    }
+}

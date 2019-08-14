@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import styles from "./App.module.css";
+import Characters from "./components/Characters/Characters";
 
-function App() {
+const App = () => {
+  const [characters, setCharacters] = useState([]);
+  const [myCharacters] = useState([
+    "Bender",
+    "Leela",
+    "Fry",
+    "Dr-Zoidberg",
+    "Professor-Farnsworth",
+    "Amy",
+    "Zapp-Brannigan",
+    "Kif",
+    "Hermes",
+    "Lurr"
+  ]);
+
+  const getCharacter = async name => {
+    const response = await fetch(
+      `https://futuramaapi.herokuapp.com/api/characters/${name}`
+    );
+    const data = await response.json();
+
+    // change the structure of data
+    const newCharacter = {
+      character: data[0].character,
+      quotes: data.map(item => item.quote),
+      image: data[0].image
+    };
+
+    setCharacters(characters => [...characters, newCharacter]);
+  };
+
+  useEffect(() => {
+    myCharacters.forEach(item => getCharacter(item));
+  }, [myCharacters]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.App}>
+      <Characters characters={characters} />
     </div>
   );
-}
+};
 
 export default App;
