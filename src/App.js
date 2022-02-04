@@ -3,6 +3,11 @@ import styles from "./App.module.css";
 import Characters from "./components/Characters/Characters";
 
 const App = () => {
+  // test
+  // add test 
+  // add test 3
+  // add test 4
+  // add test 5
   const [characters, setCharacters] = useState([]);
   const [myCharacters] = useState([
     "Bender",
